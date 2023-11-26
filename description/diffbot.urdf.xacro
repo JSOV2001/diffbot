@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name= "diffbot">
+    <xacro:include filename= "diffbot_core.xacro"/>
+
+    <!-- Cargar los dos controladores-->
+    <xacro:include filename= "ros2_control.xacro"/> <!-- En el launch se decide cual se activa para fucnionar -->
+</robot>
+    

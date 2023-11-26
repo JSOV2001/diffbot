@@ -1,0 +1,32 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100
+    
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    diff_drive_controller:
+      type: diff_drive_controller/DiffDriveController
+
+diff_drive_controller: # Automaticamente controla la velocidad
+  ros__parameters:
+    publish_rate: 100.0
+
+    # Informacion del URDF del robot
+    base_frame_id: base_link
+    left_wheel_names: ['left_wheel_joint']
+    right_wheel_names: ['right_wheel_joint']
+
+    # Geometria del robot
+    wheel_separation: 0.1834 
+    wheel_radius: 0.0215
+
+    # Mensaje para la velocidad
+    use_stamped_vel: false # Usar mensaje Twist
+    # use_stamped_vel: true # Usar mensaje TwistStamped
+
+    open_loop_control: true
+    constraints:
+      stopped_velocity_tolerance: 0.01
+      goal_time: 0.0
+    

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+    <gazebo>
+        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+            <robotNamespace>diffbot</robotNamespace>
+            <!-- Dos controladores diferentes -->
+
+            <!-- Velocidad para cada joint -->
+            <parameters>$(find diffbot)/config/joint_group_velocity_controller.yaml</parameters>
+            
+            <!-- Velocidad del modelo diferencial  -->
+            <parameters>$(find diffbot)/config/diff_drive_controller.yaml</parameters>
+        </plugin>
+    </gazebo>
+
+    <ros2_control name="GazeboSystem" type="system">
+        <hardware>
+            <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+        </hardware>
+
+        <joint name="right_wheel_joint">
+            <!-- Velocidad es la variable-->
+            <command_interface name="velocity"/>
+            <!-- Diff Drive Controller necesita los states interfaces de Posicion y Velocidad -->
+            <state_interface name="position"/> 
+            <state_interface name="velocity"/> <!-- Join Group Velocity Controller solo necesita Velocidad -->
+        </joint>
+
+        <joint name="left_wheel_joint">
+            <!-- Velocidad es la variable-->
+            <command_interface name="velocity"/>
+            <!-- Diff Drive Controller necesita los states interfaces de Posicion y Velocidad -->
+            <state_interface name="position"/> 
+            <state_interface name="velocity"/> <!-- Join Group Velocity Controller solo necesita Velocidad -->
+        </joint>
+    </ros2_control>
+</robot >

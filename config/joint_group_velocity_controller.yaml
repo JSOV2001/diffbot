@@ -1,0 +1,32 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100
+    
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    joint_group_velocity_controller:
+      type: velocity_controllers/JointGroupVelocityController
+
+joint_group_velocity_controller:
+  ros__parameters:
+
+    # Informacion del URDF del robot
+    joints:
+      - left_wheel_joint
+      - right_wheel_joint
+
+    # Variables del controlador en el robot
+    command_interfaces:
+      - velocity
+
+    state_interfaces:
+      - velocity
+
+    state_publish_rate: 50.0
+    action_monitor_rate: 20.0
+    allow_partial_joints_goal: true
+    open_loop_control: true
+    constraints:
+      stopped_velocity_tolerance: 0.01
+      goal_time: 0.0
